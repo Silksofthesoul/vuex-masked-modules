@@ -1,0 +1,43 @@
+{
+  "name": "vuex-masked-modules",
+  "version": "0.0.0",
+  "description": "Plugin for working with Vuex. Allows to use localeStorage to store state. It is possible to \"mask\" data in the localStorage cell.",
+  "main": "./dist/vuex-masked-modules.umd.js",
+  "scripts": {
+    "build": "vite build",
+    "test": "node -e \"P=Math,G=console,$='\\n',I=P.max,i=P.min,U=P.round,u=G.log,O=(s,n)=>s.repeat(n),o=y=>y.length,p=(a,A)=>O(' ',U((I(o(a),o(A))-i(o(a),o(A)))/2))+a,X='Hello Friend!'+$,x='Just Trust Me!'+$,h=`[${O('=',I(o(X),o(x)))}]`+$;u(h+p(X,h)+p(x,h)+h);\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Silksofthesoul/vuex-masked-modules.git"
+  },
+  "keywords": [
+    "vuex",
+    "vue",
+    "localStorage"
+  ],
+  "author": "Labuzov Evgeny <silksofthesoul@yandex.ru>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Silksofthesoul/vuex-masked-modules/issues"
+  },
+  "homepage": "https://github.com/Silksofthesoul/vuex-masked-modules#readme",
+  "files": [
+    "dist"
+  ],
+  "module": "./dist/vuex-masked-modules.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/vuex-masked-modules.es.js",
+      "require": "./dist/vuex-masked-modules.umd.js"
+    }
+  },
+  "dependencies": {
+    "crypto-js": "^4.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^7.23.0",
+    "eslint-plugin-vue": "^7.8.0",
+    "vite": "^2.1.3"
+  }
+}

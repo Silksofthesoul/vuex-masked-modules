@@ -1,6 +1,6 @@
 {
   "name": "vuex-masked-modules",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Plugin for working with Vuex. Allows to use localeStorage to store state. It is possible to \"mask\" data in the localStorage cell.",
   "main": "./dist/vuex-masked-modules.umd.js",
   "scripts": {

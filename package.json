@@ -1,6 +1,6 @@
 {
   "name": "vuex-masked-modules",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Plugin for working with Vuex. Allows to use localeStorage to store state. It is possible to \"mask\" data in the localStorage cell.",
   "repository": {
     "type": "git",
@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/Silksofthesoul/vuex-masked-modules#readme",
   "main": "./dist/index.js",
-  "files": [ "dist" ],
+  "files": [
+    "dist"
+  ],
   "module": "./dist/index.js",
   "scripts": {
     "build": "rimraf dist && webpack --mode production",

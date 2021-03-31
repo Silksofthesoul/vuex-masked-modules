@@ -1,13 +1,17 @@
 const path = require('path');
 
 const entry = {
-  index: './src/index.js',
+  index: './src/t.js',
 };
 
 const output = {
   path: path.resolve(__dirname, 'dist'),
   publicPath: '/',
-  filename: '[name].js'
+  filename: 'index.js',
+  library: {
+    name: 'one',
+    type: 'umd2',
+  },
 };
 
 const target = 'web';
@@ -18,27 +22,23 @@ const _module = {
     {
       test: /\.js$/,
       exclude: /node_modules/,
-      // loader: 'babel-loader'
-      use: [
-        'babel-loader',
-        {
-          loader: 'string-replace-loader'
-        }
-      ]
+      use: ['babel-loader'],
     },
   ]
 };
 
 const externals = {
-   'crypto-js': 'crypto-js'
+   'crypto-js': {
+     commonjs: 'crypto-js'
+   }
 };
 
 module.exports = {
+  module: _module,
   entry,
   output,
   target,
   devtool,
-  module: _module,
   externals,
   stats: {
     errorDetails: true

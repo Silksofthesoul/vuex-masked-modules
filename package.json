@@ -18,6 +18,8 @@
   },
   "homepage": "https://github.com/Silksofthesoul/vuex-masked-modules#readme",
   "main": "./dist/index.js",
+  "files": [ "dist" ],
+  "module": "./dist/index.js",
   "scripts": {
     "build": "rimraf dist && webpack --mode production",
     "test": "node -e \"P=Math,G=console,$='\\n',I=P.max,i=P.min,U=P.round,u=G.log,O=(s,n)=>s.repeat(n),o=y=>y.length,p=(a,A)=>O(' ',U((I(o(a),o(A))-i(o(a),o(A)))/2))+a,X='Hello Friend!'+$,x='Just Trust Me!'+$,h=`[${O('=',I(o(X),o(x)))}]`+$;u(h+p(X,h)+p(x,h)+h);\""

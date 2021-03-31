@@ -1,7 +1,10 @@
 const path = require('path');
 
 const entry = {
-  index: './src/t.js',
+  index: './src/index.js',
+};
+const experiments = {
+  outputModule: true,
 };
 
 const output = {
@@ -9,8 +12,8 @@ const output = {
   publicPath: '/',
   filename: 'index.js',
   library: {
-    name: 'one',
-    type: 'umd2',
+    // name: 'one',
+    type: 'module',
   },
 };
 
@@ -27,19 +30,14 @@ const _module = {
   ]
 };
 
-const externals = {
-   'crypto-js': {
-     commonjs: 'crypto-js'
-   }
-};
 
 module.exports = {
   module: _module,
   entry,
+  experiments,
   output,
   target,
   devtool,
-  externals,
   stats: {
     errorDetails: true
   }

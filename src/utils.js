@@ -74,10 +74,9 @@ export const has = (o, key) => Object.prototype.hasOwnProperty.call(o, key);
 export const removeProperty = prop => ({ [prop]: undefined, ...object }) => object;
 
 // time
-export const getTimestamp = new Date().valueOf();
+export const getTimestamp = _ => new Date().valueOf();
 
 // cryptography:
-
 export const encUtf8Str = CryptoJS.enc.Utf8.stringify;
 export const encHexParse = CryptoJS.enc.Hex.parse;
 export const encUtf8 = CryptoJS.enc.Utf8;

@@ -8,7 +8,7 @@ import {
   cleanData,
   wrapKey,
 
-  co, p, every,
+  co, s, p, every,
 
   removeProperty, has,
 
@@ -158,10 +158,12 @@ export class MaskedVuex {
     if(!every(cond)(true)) return true;
     return false;
   }
+
   #initState() {
     this.#storageObject[this.#nspGuard()] = co(this.#template);
     this.#writeStore();
   }
+
   #startStoreCheck () {
     const res = this.#readStore();
     if(this.#isFirstRun(res)) {

@@ -1,0 +1,22 @@
+{
+  "name": "example-app",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "es6-promise": "^4.2.8",
+    "less": "^4.1.1",
+    "vue": "^3.0.5",
+    "vuex": "^4.0.0",
+    "vuex-masked-modules": "^1.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^1.2.1",
+    "@vue/compiler-sfc": "^3.0.5",
+    "vite": "^2.1.5"
+  }
+}

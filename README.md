@@ -70,11 +70,15 @@ export default {
 
 You can inspect your localStorage after running the test application.
 
+## Test
+
+Run `npm test`
+
 ## Contribution
 
 I will be glad if you inform me about [bugs][issues], [wishes][issues], or make a [Pull Request][PR]. Feel free.
 
-[examples]: ./examples/examples-app/
+[examples]: https://github.com/Silksofthesoul/vuex-masked-modules/tree/main/examples
 [git]: https://github.com/Silksofthesoul/vuex-masked-modules
 [npm]: https://www.npmjs.com/package/vuex-masked-modules
 [issues]: https://github.com/Silksofthesoul/vuex-masked-modules/issues

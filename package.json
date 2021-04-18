@@ -19,7 +19,8 @@
   "homepage": "https://github.com/Silksofthesoul/vuex-masked-modules#readme",
   "main": "./src/index.js",
   "files": [
-    "dist"
+    "src",
+    "examples",
   ],
   "module": "./src/index.js",
   "scripts": {

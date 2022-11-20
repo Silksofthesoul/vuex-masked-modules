@@ -1,7 +1,7 @@
 # vuex-masked-modules
-Plugin for working with Vuex. Allows to use localeStorage to store state. It is possible to "mask" data in the localStorage cell.
+Plugin for working with Vuex. Allows you to select the type of storage, localStorage or sessionStorage for storing state. It is possible to "mask" data in the storage cell.
 
-The plugin uses one storage key in which it stores masked data. DO NOT USE FOR STORING CONFIDENTIAL DATA. Just a disguise.
+The plugin uses one storage key in which it stores masked data. DO NOT USE FOR STORING CONFIDENTIAL DATA. Just a masking.
 
 Encryption keys are generated automatically, you cannot set the keys yourself. Perhaps it will be implemented in the next versions. Or maybe not.
 
@@ -21,6 +21,7 @@ export const namespace = 'ModuleName'; // key in store, module name
 export const isEncrypt = true; // encrypt (masked) data or not
 export const isMaskedKey = true; // masked key in store or not
 export const isInitLog = true; // show store object in console
+export const storageType = 'sessionStorage'; // select type store. 'localStorage' (default) or 'sessionStorage'
 export const isFlush = false; // flush store
 
 // middlewares functions
@@ -42,6 +43,7 @@ export const settings = {
   isInitLog,
   isFlush,
   middlewares,
+  storageType,
   template,
 };
 
@@ -68,7 +70,7 @@ export default {
 
 [See examples][examples]
 
-You can inspect your localStorage after running the test application.
+You can inspect your localStorage or sessionStorage after running the test application.
 
 ## Test
 

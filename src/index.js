@@ -26,6 +26,8 @@ export class MaskedVuex {
   #isInitLog = false;
   #isEncriptedStoreInit = false;
   #storageObject = {};
+  #storageType = 'localStorage';
+  #storageAcceptedTypes = ['localStorage', 'sessionStorage'];
   #key = null;
   #middlewares = [];
   constructor({
@@ -36,10 +38,12 @@ export class MaskedVuex {
     isMaskedKey = false,
     isInitLog = true,
     isFlush = false,
+    storageType = 'localStorage',
     middlewares = [],
   }) {
     const cond = [ isExist(namespace), isExist(storageName) ];
     if(!every(cond)(true)) return this.#reject;
+    if(this.#storageAcceptedTypes.includes(storageType) === true) this.#storageType = storageType;
     this.#namespace = namespace;
     this.#template = template;
     this.#storageName = storageName;
@@ -66,24 +70,24 @@ export class MaskedVuex {
   }
 
   #flush () {
-    let storeRow = p(readS(this.#storageName) || '{}');
+    let storeRow = p(readS(this.#storageName, this.#storageType) || '{}');
     if(has(storeRow, this.#namespace)) {
       storeRow = removeProperty(this.#namespace)(storeRow);
-      writeS(this.#storageName, s(storeRow));
+      writeS(this.#storageName, s(storeRow), this.#storageType);
     }
     if(has(storeRow, wrapKey(this.#namespace))) {
       storeRow = removeProperty(wrapKey(this.#namespace))(storeRow);
-      writeS(this.#storageName, s(storeRow));
+      writeS(this.#storageName, s(storeRow, this.#storageType));
     }
     const template = co(this.#template);
     return {
-      getState() { return template },
+      getState() { return template; },
       getPlugin() { return function (store) { }; }
     };
   }
 
   #writeStore () {
-    let existStore = this.#readStore();
+    let existStore = this.#readStore(this.#storageType);
     let toWriteObject = co({...existStore, ...this.#storageObject});
     if(this.#isEncrypt) {
       let encr = this.#encrypt(this.#storageObject[this.#nspGuard()]);
@@ -91,11 +95,11 @@ export class MaskedVuex {
       toWriteObject = {...existStore, [this.#nspGuard()]: encr};
     }
     const data = s(toWriteObject);
-    writeS(this.#storageName, data);
+    writeS(this.#storageName, data, this.#storageType);
   }
 
   #readStore () {
-    const resStore = readS(this.#storageName);
+    const resStore = readS(this.#storageName, this.#storageType);
     try {
       var res = isExist(resStore) ? p(resStore): resStore;
     } catch (e) {
@@ -205,16 +209,16 @@ export class MaskedVuex {
   }
 
   #garbageKeyGuard() {
-    let storeRow = p(readS(this.#storageName) || '{}');
+    let storeRow = p(readS(this.#storageName, this.#storageType) || '{}');
     if(this.#isMaskedKey) {
       if(has(storeRow, this.#namespace)) {
         storeRow = removeProperty(this.#namespace)(storeRow);
-        writeS(this.#storageName, s(storeRow));
+        writeS(this.#storageName, s(storeRow), this.#storageType);
       }
     } else {
       if(has(storeRow, wrapKey(this.#namespace))) {
         storeRow = removeProperty(wrapKey(this.#namespace))(storeRow);
-        writeS(this.#storageName, s(storeRow));
+        writeS(this.#storageName, s(storeRow), this.#storageType);
       }
     }
   }
@@ -226,7 +230,7 @@ export class MaskedVuex {
 
   getPlugin() {
     const self = this;
-    self.#initLog();
+    if(self.#isInitLog) self.#initLog();
     return function (store) {
       store.subscribe((mutation, state) => {
 

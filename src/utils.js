@@ -57,19 +57,24 @@ export const co = o => p(s(o));
 export const every = arr => val => arr.every(item => item === val);
 
 // localStorage
-export const getStorage = _ => window.localStorage;
-export const writeStore = (key, val) => {
-  const store = getStorage();
+export const getStorage = _type => {
+  let type = 'localStorage';
+  let types = ['localStorage', 'sessionStorage'];
+  if(types.includes(_type) === true) type = _type;
+  return window[type];
+};
+export const writeStore = (key, val, type = 'localStorage') => {
+  const store = getStorage(type);
   if(isString(val)) store.setItem(key, val);
   else return store.setItem(key, s(val));
 };
 
-export const readStore = key => {
-  const store = getStorage();
+export const readStore = (key, type = 'localStorage') => {
+  const store = getStorage(type);
   return store.getItem(key);
 };
 
-// obejct
+// object
 export const has = (o, key) => Object.prototype.hasOwnProperty.call(o, key);
 export const removeProperty = prop => ({ [prop]: undefined, ...object }) => object;
 

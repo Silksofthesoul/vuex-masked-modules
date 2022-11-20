@@ -2,8 +2,9 @@ export const storageName = 'app';
 export const namespace = 'Modal';
 export const isEncrypt = true;
 export const isMaskedKey = true;
-export const isInitLog = true;
+export const isInitLog = false;
 export const isFlush = false;
+export const storageType = 'sessionStorage';
 export const middlewares = [
   ({type, payload}) => console.log(type, payload),
 ];
@@ -25,5 +26,6 @@ export const settings = {
   isInitLog,
   isFlush,
   middlewares,
+  storageType,
   template,
 };

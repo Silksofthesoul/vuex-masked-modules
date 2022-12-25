@@ -8,16 +8,12 @@ export const random = _ => Math.random();
 export const floor = _ => Math.floor(_);
 export const rndMinMaxInt = (min, max) => floor(random() * (max - min + 1)) + min;
 export const getUniqIntArray = (length, min, max) => {
-  const unq = [];
+  let unq = [];
   if (min > max) return false;
-  if (max - min < length) {
-    length = max - min;
-  }
+  if (max - min < length) length = max - min;
   while (unq.length < length) {
     const rnd = rndMinMaxInt(min, max);
-    if (unq.indexOf(rnd) === -1) {
-      unq.push(rnd);
-    }
+    if (unq.indexOf(rnd) === -1) unq.push(rnd);
   }
   return unq;
 };
@@ -54,7 +50,12 @@ export const isObject = val => {
 export const p = s => JSON.parse(s);
 export const s = (o, fp = null, sp = null) => JSON.stringify(o, fp, sp);
 export const co = o => p(s(o));
-export const every = arr => val => arr.every(item => item === val);
+export const every = arr => {
+  return val => {
+    for (let i = 0; i < arr.length; i++) if(arr[i] !== val) return false;
+    return true;
+  };
+};
 
 // localStorage
 export const getStorage = _type => {
@@ -140,7 +141,11 @@ export const keyGen = _ => {
   const appVersion = str(window.navigator.appVersion);
   const date = str(getTimestamp());
   const uniq = sha512(str(getUniqIntArray(9, 0, 9).join(''))).split('');
-  const res = uniq.map((item, i) => `${item}${i}${rndMinMaxInt(0,9)}`);
+  let res = [];
+  for (let i = 0; i < uniq.length; i++) {
+    let item = uniq[i];
+    res.push(`${item}${i}${rndMinMaxInt(0,9)}`);
+  }
   return md5(`${date}-${appVersion}-${res.join('')}`);
 };
 
